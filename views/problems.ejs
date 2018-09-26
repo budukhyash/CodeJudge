@@ -1,0 +1,25 @@
+<% include partials/header%>
+
+<div class="container">
+    <h1>Index Bitch</h1>
+    <br>
+
+    <% problems.forEach(function(problem) { %>
+        <% if(problem.isSolved==1) { %>
+            <div>
+                <h2><%= problem.title %></h2>
+                <a href="/problems/<%=problem._id%>">Read More</a>
+                <p>SOLVED</p>
+            </div>
+        <% } else { %>
+            <div>
+                <h2><%= problem.title %></h2>
+                <a href="/problems/<%=problem._id%>">Read More</a>
+            </div>
+        <% } %>
+    <% }); %>
+
+    
+</div>
+
+<% include partials/footer%>

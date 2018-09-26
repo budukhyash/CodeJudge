@@ -1,0 +1,50 @@
+<% include partials/header%>
+
+    <div class="container">
+        <center>
+            <h1>Code Judge</h1>
+        </center>
+
+        <form action="/ide" method="POST">
+
+            <select name="lang" class="mdb-select md-form">
+                <option value=" ">--Select Language--</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+                <option value="java">Java</option>
+                <option value="python3">Python 3</option>
+            </select>
+            <br><br>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea3">
+                    <strong>Source Code</strong>
+                </label>
+                <textarea class="form-control" id="exampleFormControlTextarea3" rows="15" name="source" required="1" placeholer="Source"
+                    wrap="soft"><%=source%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea3">
+                    <strong>Input</strong>
+                </label>
+                <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" name="stdin" wrap="soft"><%=stdin%></textarea>
+            </div>
+
+            <br>
+            <div>
+                <input type="submit" class="btn btn-primary btn-md" value="Submit">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea3">
+                    <strong>Output</strong>
+                </label>
+                <textarea readonly class="form-control" id="exampleFormControlTextarea3" rows="3" name="output" wrap="soft"><%=output%></textarea>
+            </div>
+
+        </form>
+
+    </div>
+
+    <% include partials/footer%>
