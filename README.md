@@ -1,2 +1,3 @@
 # CodeJudge
-NodeJS based codejudge for DBMS mini project
+TE Mini Project
+Node js project for college assignment management through online codejudge

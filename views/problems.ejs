@@ -1,0 +1,14 @@
+<% include partials/header%>
+
+<h1>Index Bitch</h1>
+
+
+<%problems.forEach(function(problem){%>
+    <div>
+        <h2><%=problem.title%></h2>
+        <a href="/problems/<%=problem._id%>">Read More</a>
+    </div>
+  
+ <% });%>
+
+<% include partials/footer%>
