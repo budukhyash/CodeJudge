@@ -14,17 +14,17 @@ router.use(function(req,res,next){
     next();
 });
 
-router.get("/problems", function (req, res) {
+router.get("/problems",middleware.isLoggedIn,function (req, res) {
     
-    if(!req.user){
-    res.redirect("/login");}
+    // if(!req.user){
+    // res.redirect("/login");}
 
     userId = req.user._id;
     User.findOne({ _id: userId }, function (err, foundUser) {
         if (err) {
             console.log(err);
         } else {
-            console.log("solveids filling");
+            //console.log("solveids filling");
             solvedIds = foundUser.solved;
         }
     });
@@ -46,7 +46,7 @@ router.get("/problems", function (req, res) {
     });
 });
 
-router.get("/problems/new",function(req,res){
+router.get("/problems/new",middleware.isAdmin,function(req,res){
     res.render("new"); 
 });
 
@@ -70,8 +70,7 @@ router.get("/problems/:id",function(req,res){
 router.get("/problems/:id/ide",function(req,res){
    
 
-    PB.findById(req.params.id,function(err,foundProblem)
-    
+    PB.findById(req.params.id,function(err,foundProblem) 
    {
        if(err)
        {
@@ -103,7 +102,7 @@ router.post("/problems",function(req,res)
    });
 });
 
-router.get("/problems/:id/edit",function(req,res){
+router.get("/problems/:id/edit",middleware.isAdmin,function(req,res){
   
     PB.findById(req.params.id,function(err,foundProblem){
        if(err){
@@ -190,7 +189,7 @@ router.post("/problems/:id/ide", function (req, res) {
 
 // Update and delete
 
-router.put("/problems/:id",function(req,res){
+router.put("/problems/:id",middleware.isAdmin,function(req,res){
    PB.findOneAndUpdate(req.params.id,req.body.problem,function(err,updatedProblem){
        if(err){
            res.redirect("/problems");
@@ -201,7 +200,7 @@ router.put("/problems/:id",function(req,res){
    }) ;
 });
 
-router.delete("/problem/:id",function(req,res){
+router.delete("/problem/:id",middleware.isAdmin,function(req,res){
     PB.findOneAndDelete(req.params.id,function(err){
         if(err){
             res.redirect("/problems");

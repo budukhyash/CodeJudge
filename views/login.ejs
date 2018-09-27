@@ -1,14 +1,27 @@
 <% include partials/header%>
+    <div class="ui main text container segment">
+        <br><br><br>
+        <div class="ui header"><center><h2>!! LOGIN !!</h2></center></div>
+    
+    <form class="ui massive form"  action="/login" method ="POST">
+        
+        <div class="field">
+            <label>UserName</label>
+            <input type="text" name="username" placeholder="username" required>
+        </div>
+        
+        <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="password" required>
+        </div>
+        
+        <button class="positive ui massive button">Login</button>
+        
+    </form>
 
-<h1>Login Page</h1>
 
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="Username">
-    <input type="Password" name="password" placeholder="Password">
-    <button class="btn btn-primary">Login</button>
-</form>
-
-
+    </div>
+    
 
 
 <% include partials/footer%>

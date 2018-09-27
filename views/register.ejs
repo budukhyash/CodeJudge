@@ -1,11 +1,27 @@
 <% include partials/header%>
-
-    <h1>Sign Up form</h1>
-
-    <form action="/register" method="POST">
-        <input type="text" name="username" placeholder="Username">
-        <input type="Password" name="password" placeholder="Password">
-        <button class="btn btn-lg btn-primary">Submit</button>
+    <div class="ui main text container segment">
+        <br><br><br>
+        <div class="ui header"><center><h2>!! REGISTER !!</h2></center></div>
+    
+    <form class="ui massive form"  action="/register" method ="POST">
+        
+        <div class="field">
+            <label>UserName</label>
+            <input type="text" name="username" placeholder="username" required>
+        </div>
+        
+        <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="password" required>
+        </div>
+        
+        <button class="positive ui massive button">Login</button>
+        
     </form>
 
-    <% include partials/footer%>
+
+    </div>
+    
+
+
+<% include partials/footer%>

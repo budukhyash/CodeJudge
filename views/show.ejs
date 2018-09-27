@@ -1,52 +1,61 @@
 <% include partials/header%>
 
-    <br><br><br>
+    <br>
+    <br>
+    <br>
     <div class="ui main text container segment">
-        <div class="ui huge header"><h1><%=problem.title%></h2></div>
+        <div class="ui huge header">
+            <h1>
+                <%=problem.title%>
+                    </h2>
+        </div>
         <div class="io top attached">
             <div class="item">
                 <div class="content">
                     <%= problem.statement%>
                 </div>
-        
+
             </div>
-        
+
         </div>
-           
-        </div>
-    <form class="ui form" >
-     
+
+    </div>
+    <form class="ui form">
+
         <div class="field">
-                    <label>Sample Test Input</label>
-                    <textarea name="problem[sampleIntput]" placeholder="image"><%=problem.sampleInput%></textarea>
-                    </div>
-                  
-              
-                  
-                   <div class="field">
-                    <label>Sample Test Output</label>
-                    <textarea name="problem[sampleOutput]" placeholder="image"><%=problem.sampleOutput%></textarea>
-                    </div>
-                  
-           
-   </form>
+            <label>Sample Test Input</label>
+            <textarea name="problem[sampleIntput]" placeholder="image"><%=problem.sampleInput%></textarea>
+        </div>
 
 
 
-<form method="get" action="/problems/<%=problem._id%>/ide">
-    <button class="positive ui button">Submit</button>
-</form>
+        <div class="field">
+            <label>Sample Test Output</label>
+            <textarea name="problem[sampleOutput]" placeholder="image"><%=problem.sampleOutput%></textarea>
+        </div>
 
 
-<form action="http://localhost:3000/problems/<%=problem._id%>/edit" method="GET">
-    <button class="ui violet button">Edit</button>
-</form>
+    </form>
 
 
-<form action="/problem/<%=problem._id%>?_method=DELETE" method="POST">
-    <button class="negative ui button">Delete</button>
-</form>
 
-<% include partials/footer%>
+    <form method="get" action="/problems/<%=problem._id%>/ide">
+        <button class="positive ui button">Submit</button>
+    </form>
 
-<% include partials/footer%>
+
+    <% if(currentUser.username=="admin"){%>
+
+        <form action="http://localhost:3000/problems/<%=problem._id%>/edit" method="GET">
+            <button class="ui violet button">Edit</button>
+        </form>
+
+        <form action="/problem/<%=problem._id%>?_method=DELETE" method="POST">
+            <button class="negative ui button">Delete</button>
+        </form>
+
+        <%}%>
+
+            <% include partials/footer%>
+
+            

@@ -16,9 +16,6 @@ var express=require("express"),
 
 mongoose.connect("mongodb://localhost/codejudge");
 
-
-
-
 app.use(require("express-session")({
    
    secret:"Random text to encode passwords",
