@@ -6,29 +6,20 @@ clone the repository see package.json for the dependencies run node app.js
 
 ### Prerequisites
 
-Check package.json
+
 
 ```
-Give examples
+Check package.json
 ```
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
-
 Say what the step will be
 
 ```
-Give the example
+Install files from package.json and run app.js
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Deployment
 We have used cloud9 ide
