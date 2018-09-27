@@ -9,7 +9,8 @@ var express=require("express"),
     CJ=require("./models/codejudge"),
     PB=require("./models/problems"),
     request = require('request'),
-    methodOverride=require("method-override");
+    methodOverride=require("method-override"),
+    flash = require("connect-flash");
 
     var problemRoutes=require("./routes/problems"),
     authRoutes=require("./routes/index");
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 app.use(authRoutes); 
 app.use(problemRoutes);
