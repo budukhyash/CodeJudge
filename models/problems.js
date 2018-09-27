@@ -10,24 +10,24 @@
        sourceCode:Clients source code
 
 */
-       
 
-var mongoose=require("mongoose");
 
-var pb=new mongoose.Schema({
-    
-       statement:String,
-       testcases:String,
-       serverOutput:String,
-       sampleInput:String,
-       sampleOutput:String,
-       title:String,
-       userOutput:String,
-       lang:String,
-       sourceCode:String
-    
+var mongoose = require("mongoose");
+
+var pb = new mongoose.Schema({
+
+    statement: String,
+    testcases: String,
+    serverOutput: String,
+    sampleInput: String,
+    sampleOutput: String,
+    title: String,
+    userOutput: String,
+    lang: String,
+    sourceCode: String,
+    isSolved: { type: Number, default: 0 }
 });
 
-module.exports=mongoose.model("problem",pb);
- 
- 
+module.exports = mongoose.model("problem", pb);
+
+

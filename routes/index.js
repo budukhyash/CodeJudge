@@ -6,7 +6,7 @@ var passport=require("passport");
 var User=require("../models/user");
 var request=require('request');
 var middleware=require("../middleware");
-
+var username;
 
 router.use(function(req,res,next){ 
     res.locals.currentUser=req.user;
