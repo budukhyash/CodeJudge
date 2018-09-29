@@ -10,6 +10,9 @@ var username;
 
 router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    res.locals.deleted = req.flash("deleted");
     next();
 });
 
@@ -24,6 +27,18 @@ router.get("/", function (req, res) {
 router.get("/ide", middleware.isLoggedIn, function (req, res) {
 
     res.render("landing", { source: "", stdin: "", output: "Your Output", currentUser: req.user });
+});
+
+router.get("/profile", middleware.isLoggedIn, function(req, res) {
+    
+    User.findOne({username: req.user.username}).populate("solved").exec(function(err, user) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("profile", {user: user});
+        }
+    });
+    
 });
 
 router.post("/ide", function (req, res) {
@@ -63,10 +78,11 @@ router.get("/register", function (req, res) {
 router.post("/register", function (req, res) {
     User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
         if (err) {
-            console.log(err);
+            req.flash("error", err);
             return res.render('register');
         }
         passport.authenticate("local")(req, res, function () {
+            req.flash("success", "Welcome " + user.username);
             res.redirect("/problems");
         });
     });
@@ -74,20 +90,20 @@ router.post("/register", function (req, res) {
 });
 
 router.get("/login", function (req, res) {
-    res.render("login", { message: req.flash("error") });
+    res.render("login");
 });
 
 router.post("/login", passport.authenticate("local", {
 
-    successRedirect: "/problems",
-    failureRedirect: "/login"
+    successRedirect: "problems",
+    failureRedirect: "login"
 })
     , function (req, res) {
-
     });
 
 router.get("/logout", function (req, res) {
     req.logout();
+    req.flash("success", "Logged Out!");
     res.redirect("/");
 });
 

@@ -1,27 +1,30 @@
 <% include partials/header%>
-    <div class="ui main text container segment">
-        <br><br><br>
-        <div class="ui header"><center><h2>!! REGISTER !!</h2></center></div>
-    
-    <form class="ui massive form"  action="/register" method ="POST">
-        
-        <div class="field">
-            <label>UserName</label>
-            <input type="text" name="username" placeholder="username" required>
-        </div>
-        
-        <div class="field">
-        <label>Password</label>
-        <input type="password" name="password" placeholder="password" required>
-        </div>
-        
-        <button class="positive ui massive button">Login</button>
-        
-    </form>
 
+    <div class="container">
+        <br><br><br>
+
+        <div class="card card container">
+            <center>
+                <h2>!! REGISTER !!</h2>
+            </center>
+            <br>
+            <form class="form-signin" action="/register" method="POST">
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input class="form-control" type="text" name="username" placeholder="Username" required>
+                </div><br>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
+                </div><br>
+
+                <button class="btn btn-lg btn-block" style="color: whitesmoke; background-color: #232f3e">SIGN UP</button>
+
+            </form>
+        </div>
 
     </div>
-    
 
-
-<% include partials/footer%>
+    <% include partials/footer%>

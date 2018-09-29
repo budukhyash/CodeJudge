@@ -1,42 +1,43 @@
-var express=require("express")
-var router =express.Router();
-var PB=require("../models/problems");
-var CJ=require("../models/codejudge");
-var request=require('request');
-var methodOverride=require("method-override");
-var middleware=require("../middleware");
+var express = require("express")
+var router = express.Router();
+var PB = require("../models/problems");
+var CJ = require("../models/codejudge");
+var request = require('request');
+var methodOverride = require("method-override");
+var middleware = require("../middleware");
 var userId;
 var User = require("../models/user");
 var solvedIds;
 
-router.use(function(req,res,next){ 
-    res.locals.currentUser=req.user;
+router.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    res.locals.deleted = req.flash("deleted");
     next();
 });
 
-router.get("/problems",middleware.isLoggedIn,function (req, res) {
-    
-    // if(!req.user){
-    // res.redirect("/login");}
+router.get("/problems", middleware.isLoggedIn, function (req, res) {
 
     userId = req.user._id;
     User.findOne({ _id: userId }, function (err, foundUser) {
         if (err) {
             console.log(err);
         } else {
-            //console.log("solveids filling");
             solvedIds = foundUser.solved;
         }
     });
     PB.find({}, function (err, problems) {
         if (err) {
+            req.flash("error", "No Problems to display!!!");
+            res.redirect("problems");
             console.log("Error");
         }
         else {
             problems.forEach(function (problem) {
                 solvedIds.find(function (element) {
-                    
-                    if(element.toString() == problem._id) {
+
+                    if (element.toString() == problem._id) {
                         problem.isSolved = 1;
                     }
                 });
@@ -46,72 +47,56 @@ router.get("/problems",middleware.isLoggedIn,function (req, res) {
     });
 });
 
-router.get("/problems/new",middleware.isAdmin,function(req,res){
-    res.render("new"); 
+router.get("/problems/new", middleware.isAdmin, function (req, res) {
+    res.render("new");
 });
 
-router.get("/problems/:id",function(req,res){
-    
-    
-     PB.findById(req.params.id,function(err,foundProblem)
-   {
-       if(err)
-       {
-           res.redirect("/problems");
-       }
-       else
-       {
-           res.render("show",{source:"",stdin:"",output:"Your Output",problem:foundProblem});
-       }
-   });
-    
-});
+router.get("/problems/:id", function (req, res) {
 
-router.get("/problems/:id/ide",function(req,res){
-   
-
-    PB.findById(req.params.id,function(err,foundProblem) 
-   {
-       if(err)
-       {
-           res.redirect("/problems");
-       }
-       else
-       {    
-        
-           res.render("compile",{source:"",output:"Your Output",problem:foundProblem}); 
-       }
-   });
-   
-   
-   
-});
-
-router.post("/problems",function(req,res)
-{
-
- 
-   PB.create(req.body.problem,function(err,newProblem){
-       if(err){
-        console.log("ERROR");
+    PB.findById(req.params.id, function (err, foundProblem) {
+        if (err) {
+            res.redirect("/problems");
         }
-        else{
-         
-        res.redirect("/problems");
+        else {
+            res.render("show", { source: "", stdin: "", output: "Your Output", problem: foundProblem });
         }
-   });
+    });
 });
 
-router.get("/problems/:id/edit",middleware.isAdmin,function(req,res){
-  
-    PB.findById(req.params.id,function(err,foundProblem){
-       if(err){
-           res.redirect("/problems");
-       }else
-       {
-           res.render("edit",{problem:foundProblem});
-       }
-        
+router.get("/problems/:id/ide", function (req, res) {
+    PB.findById(req.params.id, function (err, foundProblem) {
+        if (err) {
+            res.redirect("/problems");
+        }
+        else {
+            res.render("compile", { source: "", output: "Your Output", problem: foundProblem });
+        }
+    });
+});
+
+router.post("/problems", function (req, res) {
+
+
+    PB.create(req.body.problem, function (err, newProblem) {
+        if (err) {
+            console.log("ERROR");
+        }
+        else {
+
+            res.redirect("/problems");
+        }
+    });
+});
+
+router.get("/problems/:id/edit", middleware.isAdmin, function (req, res) {
+
+    PB.findById(req.params.id, function (err, foundProblem) {
+        if (err) {
+            res.redirect("/problems");
+        } else {
+            res.render("edit", { problem: foundProblem });
+        }
+
     });
 });
 
@@ -147,6 +132,7 @@ router.post("/problems/:id/ide", function (req, res) {
                 json: program
             },
                 function (error, response, body) {
+                    //req.flash("solved", "Congratulations!!! You Solved this problem!");
                     res.render("compile", { output: body['output'], source: script, lang: lang, problem: problem });
 
                     userOutput = body['output'];
@@ -161,27 +147,33 @@ router.post("/problems/:id/ide", function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                //console.log(foundUser.solved);
+                                var flag = 0;
                                 problem.isSolved = 1;
-                                //console.log(problem);
-                                foundUser.solved.push(problem);
-                                foundUser.save(function (err, data) {
-                                    if (err) {
-                                        console.log(err);
-                                    } else {
-                                        console.log(data);
+
+                                foundUser.solved.find(function (element) {
+                                    if (element.toString() == problem._id) {
+                                        flag = 1;
                                     }
                                 });
+
+                                if (!flag) {
+                                    foundUser.solved.push(problem);
+                                    foundUser.save(function (err, data) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                            console.log(data);
+                                        }
+                                    });
+                                }
                             }
                         });
+
                     }
                     else {
                         console.log("Wrong");
                     }
                 });
-
-
-
         }
     });
 
@@ -189,35 +181,35 @@ router.post("/problems/:id/ide", function (req, res) {
 
 // Update and delete
 
-router.put("/problems/:id",middleware.isAdmin,function(req,res){
-   PB.findOneAndUpdate(req.params.id,req.body.problem,function(err,updatedProblem){
-       if(err){
-           res.redirect("/problems");
-       }
-       else{
-           res.redirect(("/problems/" + req.params.id));
-       }
-   }) ;
-});
-
-router.delete("/problem/:id",middleware.isAdmin,function(req,res){
-    PB.findOneAndDelete(req.params.id,function(err){
-        if(err){
+router.put("/problems/:id", middleware.isAdmin, function (req, res) {
+    PB.findByIdAndUpdate(req.params.id, req.body.problem, function (err, updatedProblem) {
+        if (err) {
             res.redirect("/problems");
         }
-        else
-        {
+        else {
+            req.flash("success", "Problem Updated Successfully!!");
+            res.redirect(("/problems/" + req.params.id));
+        }
+    });
+});
+
+router.delete("/problem/:id", middleware.isAdmin, function (req, res) {
+    PB.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            res.redirect("/problems");
+        }
+        else {
+            req.flash("deleted", "Problem Deleted Successfully!!");
             res.redirect("/problems");
         }
     })
 });
 
-function isLoggedIn(req,res,next)
-{
-    if(req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
         return next();
     }
     res.redirect("login");
 }
-module.exports=router;
+module.exports = router;
 

@@ -1,43 +1,41 @@
 <% include partials/header%>
-    <div class="ui main text container segment">
+    <div class="container">
         <div class="ui huge header">New Problem</div>
     
-    <form class="ui form"  action="/problems" method ="POST">
-        
-        <div class="field">
-            <label>Title</label>
-            <input type="text" name="problem[title]" placeholder="title">
-        </div>
-        
-        <div class="field">
-            <label>Problem Statement</label>
-            <textarea name="problem[statement]" placeholder="title"></textarea>
-        </div>
-        
-        <div class="field">
-        <label>Sample Test Input</label>
-        <textarea name="problem[sampleInput]" placeholder="image"></textarea>
-        </div>
-        
-         <div class="field">
-        <label>Sample Test Output</label>
-        <textarea name="problem[sampleOutput]" placeholder="image"></textarea>
-        </div>
-        
-        <div class="field">
-        <label>Actual Test Cases</label>
-        <textarea name="problem[testcases]" placeholder="body"></textarea>
-        </div>
-        
-        <div class="field">
-        <label>Expected Output of the above testcases</label>
-        <textarea name="problem[serverOutput]" placeholder="body"></textarea>
-        </div>
-        
-        
-        <input class="ui violet big basic button" type="submit">
-    </form>
-
+        <form action="/problems" method ="POST">
+            
+            <div class="form-group">
+                <label>Title</label>
+                <input class="form-control" type="text" name="problem[title]" placeholder="Title">
+            </div>
+            
+            <div class="form-group">
+                <label>Problem Statement</label>
+                <textarea class="form-control" name="problem[statement]" placeholder="Problem" rows=5></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Sample Test Input</label>
+                <textarea class="form-control" name="problem[sampleInput]" placeholder="Sample Input" rows=5></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Sample Test Output</label>
+                <textarea class="form-control" name="problem[sampleOutput]" placeholder="Sample Output" rows=3></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Actual Test Cases</label>
+                <textarea class="form-control" name="problem[testcases]" placeholder="Test Cases Input" rows=3></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Expected Output of the above testcases</label>
+                <textarea class="form-control" name="problem[serverOutput]" placeholder="Test Cases Output" rows=3></textarea>
+            </div>
+            
+            <button class="btn btn-info" type="submit">Submit</button>
+        </form>
 
     </div>
     

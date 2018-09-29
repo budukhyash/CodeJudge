@@ -1,0 +1,18 @@
+<% include partials/header%>
+
+<div class="container">
+    <div>
+        <h1 style="font-weight: bold; color: #232f3e"><%=user.username%></h1>
+    </div>
+    <br><br>
+    <div>
+        <h2 style="color: #232f3e">List of Solved Problems:</h2>
+        <ul class="list-group">
+            <% user.solved.forEach(function(solve) { %>
+                <li style="font-size:medium; background-color: #b0c4de;" class="list-group-item"><%=solve.title%></li>
+            <% }) %>
+        </ul>
+    </div>
+</div>
+
+<% include partials/footer%>
