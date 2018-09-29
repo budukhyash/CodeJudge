@@ -28,7 +28,7 @@ We have used cloud9 ide
 ## Authors
 
 * **Yash Budukh** 
-* **Hrishi Bawane**
+* **Hrishikesh Bawane**
 
 ## License
 
