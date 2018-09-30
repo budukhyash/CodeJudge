@@ -4,12 +4,12 @@
 
     <div class="container">
         <div class="ui huge header">
-            <h1>
+            <h1 style="font-family: 'Courier New', Courier, monospace">
                 <%=problem.title%>
             </h1>
         </div>
         <div>
-            <h4><%=problem.statement%></h4>
+            <h4 style="font-family: 'Courier New', Courier, monospace"><%=problem.statement%></h4>
         </div>
     </div>
     <br>
@@ -17,12 +17,12 @@
         <form>
             <div class="form-group">
                 <label>Sample Test Input</label>
-                <textarea readonly class="form-control" name="problem[sampleIntput]" placeholder="Input" rows=5><%=problem.sampleInput%></textarea>
+                <textarea readonly class="form-control" name="problem[sampleIntput]" placeholder="Input" rows=5 style="font-family: 'Courier New', Courier, monospace"><%=problem.sampleInput%></textarea>
             </div><br>
 
             <div class="form-group">
                 <label>Sample Test Output</label>
-                <textarea readonly class="form-control" name="problem[sampleOutput]" placeholder="Output" rows=5><%=problem.sampleOutput%></textarea>
+                <textarea readonly class="form-control" name="problem[sampleOutput]" placeholder="Output" rows=5 style="font-family: 'Courier New', Courier, monospace"><%=problem.sampleOutput%></textarea>
             </div>
 
         </form>
@@ -30,7 +30,7 @@
         <br>
 
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 <form method="get" action="/problems/<%=problem._id%>/ide">
                     <button class="btn btn-success">Submit</button>
                 </form>
@@ -38,13 +38,13 @@
 
             <% if(currentUser.username=="admin"){%>
 
-                <div class="col-xs-3">
+                <div class="col-xs-2">
                     <form action="http://localhost:3000/problems/<%=problem._id%>/edit" method="GET">
                         <button class="btn btn-info">Edit</button>
                     </form>
                 </div>
 
-                <div class="col-xs-3">
+                <div class="col-xs-2">
                     <form action="/problem/<%=problem._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>

@@ -1,4 +1,4 @@
-var express = require("express")
+var express = require("express");
 var router = express.Router();
 var PB = require("../models/problems");
 var CJ = require("../models/codejudge");
@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
-    res.locals.deleted = req.flash("deleted");
+    res.locals.info = req.flash("info");
     next();
 });
 
@@ -21,24 +21,23 @@ router.use(function (req, res, next) {
 //=======================
 
 router.get("/", function (req, res) {
+    req.flash("info", "Welcome");
     res.render("home", { currentUser: req.user });
 });
 
 router.get("/ide", middleware.isLoggedIn, function (req, res) {
-
     res.render("landing", { source: "", stdin: "", output: "Your Output", currentUser: req.user });
 });
 
 router.get("/profile", middleware.isLoggedIn, function(req, res) {
-    
+
     User.findOne({username: req.user.username}).populate("solved").exec(function(err, user) {
         if(err) {
             console.log(err);
         } else {
             res.render("profile", {user: user});
         }
-    });
-    
+    }); 
 });
 
 router.post("/ide", function (req, res) {
@@ -62,7 +61,6 @@ router.post("/ide", function (req, res) {
             res.render("landing", { output: body['output'], source: script, stdin: input, lang: lang, currentUser: req.user });
 
         });
-
 });
 
 
@@ -106,6 +104,5 @@ router.get("/logout", function (req, res) {
     req.flash("success", "Logged Out!");
     res.redirect("/");
 });
-
 
 module.exports = router; 

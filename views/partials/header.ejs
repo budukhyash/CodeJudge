@@ -7,28 +7,28 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
          <link rel="stylesheet" type="text/css" href="custom.css">
     </head>
-<body style="background-color: #d6dbdf">
+<body style="background-color: white">
     
-        <nav class="navbar navbar-default" style="background-color: #232f3e; height: 60px; padding: 5px"> 
+        <nav class="navbar navbar-default" style="background-color: #232f3e; height: 60px; padding: 5px; margin: 0px"> 
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" style="color: whitesmoke; font-weight: bold">CODEJUDGE</a>
+                <a class="navbar-brand" href="/" style="color: white; font-weight: bold">CODEJUDGE</a>
             </div>
             <ul class="nav navbar-nav navbar-left active">
                 <% if(!currentUser){ %>
-                    <li><a style="color: whitesmoke" href="/register">SIGNUP</a></li>
-                    <li><a style="color: whitesmoke" href="/login">LOGIN</a></li>
+                    <li><a style="color: white" href="/register">SIGNUP</a></li>
+                    <li><a style="color: white" href="/login">LOGIN</a></li>
                 <% } else { %>
-                    <li><a style="color: whitesmoke" href="/ide">IDE</a></li>
-                    <li><a style="color: whitesmoke" href="/problems">PROBLEMS</a></li>
-                <%}%>
+                    <li><a style="color: white" href="/ide">IDE</a></li>
+                    <li><a style="color: white" href="/problems">PROBLEMS</a></li>
+                <% } %>
                 <% if(currentUser && currentUser.username=="admin"){%>
-                    <li><a style="color: whitesmoke" href="/problems/new">NEW PROBLEM</a></li>
-                <%}%>
+                    <li><a style="color: white" href="/problems/new">NEW PROBLEM</a></li>
+                <% } %>
             </ul>
             <ul class="nav navbar-nav navbar-right active">
                 <% if(currentUser){ %>
-                    <li><a style="color: whitesmoke" href="/profile">Signed in as <%=currentUser.username%></a></li>
-                    <li><a style="color: whitesmoke" href="/logout">LOGOUT</a></li>
+                    <li><a style="color: white" href="/profile">Signed in as <%=currentUser.username%></a></li>
+                    <li><a style="color: white" href="/logout">LOGOUT</a></li>
                 <% } %>
             </ul>
         </nav>
@@ -45,6 +45,10 @@
                     <%=success%>
                 </div>
             <% } %>
+
+            
+
+            
 
         </div>
 

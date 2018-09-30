@@ -1,5 +1,10 @@
 <% include partials/header%>
-
+    
+    <% if(info && info.length > 0) { %>
+        <div class="alert alert-info" role="alert">
+            <%=info%>
+        </div>
+    <% } %>
     <div class="container">
         <br><br><br>
 

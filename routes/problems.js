@@ -13,7 +13,7 @@ router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
-    res.locals.deleted = req.flash("deleted");
+    //res.locals.deleted = req.flash("deleted");
     next();
 });
 
@@ -140,7 +140,7 @@ router.post("/problems/:id/ide", function (req, res) {
                     var newCJ = { problemID: problem._id, source: script, stdin: input, lang: lang, userOutput: userOutput, serverOutput: serverOutput };
 
 
-                    if (userOutput.localeCompare(serverOutput) == 0) {
+                    if (userOutput.toString()==serverOutput.toString()) {
                         console.log("Correct");
                         CJ.create(newCJ);
                         User.findOne({ _id: userId }, function (err, foundUser) {
@@ -168,7 +168,7 @@ router.post("/problems/:id/ide", function (req, res) {
                                 }
                             }
                         });
-
+                        
                     }
                     else {
                         console.log("Wrong");

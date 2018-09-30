@@ -10,7 +10,8 @@ var express = require("express"),
     PB = require("./models/problems"),
     request = require('request'),
     methodOverride = require("method-override"),
-    flash = require("connect-flash");
+    flash = require("express-flash");
+    //flash = require("connect-flash");
 
 var problemRoutes = require("./routes/problems"),
     authRoutes = require("./routes/index");
@@ -38,7 +39,7 @@ app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
-    res.locals.deleted = req.flash("deleted");
+    //res.locals.info = req.flash("info");
     next();
 });
 
