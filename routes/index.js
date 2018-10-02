@@ -8,6 +8,7 @@ var request = require('request');
 var middleware = require("../middleware");
 var username;
 
+
 router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
@@ -59,11 +60,8 @@ router.post("/ide", function (req, res) {
     },
         function (error, response, body) {
             res.render("landing", { output: body['output'], source: script, stdin: input, lang: lang, currentUser: req.user });
-
         });
 });
-
-
 
 //======================
 //Authentication routes
@@ -74,16 +72,28 @@ router.get("/register", function (req, res) {
 });
 
 router.post("/register", function (req, res) {
-    User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
-        if (err) {
-            req.flash("error", err);
-            return res.render('register');
-        }
-        passport.authenticate("local")(req, res, function () {
-            req.flash("success", "Welcome " + user.username);
-            res.redirect("/problems");
+    var username = req.body.username.toString();
+    var password = req.body.password.toString();
+    var regEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+    if(password.length > 6 && regEx.test(password)) {
+        console.log("correct");
+        User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
+            if (err) {
+                req.flash("error", err);
+                return res.render('register');
+            }
+            passport.authenticate("local")(req, res, function () {
+                req.flash("success", "Welcome "+req.user);
+                res.redirect("/problems");
+            });
         });
-    });
+    } else {
+        console.log("wrong");
+        req.flash("error", "Password must min 6 characters long and must contain atleast one number and one special character");
+        // res.send("Password must min 6 characters long and must contain atleast one number and one special character");
+        res.redirect("/register");
+    }
 
 });
 
@@ -97,6 +107,7 @@ router.post("/login", passport.authenticate("local", {
     failureRedirect: "login"
 })
     , function (req, res) {
+        req.flash("error", "Wrong Password!!!");
     });
 
 router.get("/logout", function (req, res) {

@@ -10,8 +10,7 @@ var express = require("express"),
     PB = require("./models/problems"),
     request = require('request'),
     methodOverride = require("method-override"),
-    flash = require("express-flash");
-    //flash = require("connect-flash");
+    flash = require("connect-flash");
 
 var problemRoutes = require("./routes/problems"),
     authRoutes = require("./routes/index");

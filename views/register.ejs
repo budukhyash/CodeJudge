@@ -1,28 +1,33 @@
 <% include partials/header%>
 
     <div class="container">
-        <br><br><br>
+        <br>
+        <br>
+        <br>
 
-        <div class="card card container">
+        <div class="container">
             <center>
-                <h2>!! REGISTER !!</h2>
+                <h2>REGISTER</h2>
+
+                <br>
+                <form class="form-signin" action="/register" method="POST">
+
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" name="username" placeholder="Username" required style="width: 500px">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" type="password" name="password" placeholder="Password" required style="width: 500px">
+                    </div>
+                    <br>
+
+                    <button class="btn btn-lg btn-block" style="color: white; background-color: #232f3e; width: 500px">SIGN UP</button>
+
+                </form>
             </center>
-            <br>
-            <form class="form-signin" action="/register" method="POST">
-
-                <div class="form-group">
-                    <label>Username</label>
-                    <input class="form-control" type="text" name="username" placeholder="Username" required>
-                </div><br>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" type="password" name="password" placeholder="Password" required>
-                </div><br>
-
-                <button class="btn btn-lg btn-block" style="color: whitesmoke; background-color: #232f3e">SIGN UP</button>
-
-            </form>
         </div>
 
     </div>
