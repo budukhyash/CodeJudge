@@ -1,15 +1,16 @@
 <% include partials/header%>
     <br>
-    <br>
 
     <div class="container">
         <center>
-            <h1>Code Judge</h1>
+            <h1 style="font-family: 'Allerta Stencil'">Code Judge</h1>
         </center>
         <br>
-        <br>
 
-        <form action="/problems/<%=problem._id%>/ide" method="POST">
+        <form action="/problems/<%=problem.id%>/ide" method="POST">
+
+            <h4 style="font-weight: bold; font-family: Niramit">Problem:</h4>
+            <p style="font-family: Niramit"><%=problem.statement%></p>
 
             <div>
                 <select name="lang" class="mdb-select md-form">
@@ -21,27 +22,27 @@
                 </select>
             </div><br>
             <div class="form-group">
-                <label for="exampleFormControlTextarea3">
+                <label for="exampleFormControlTextarea3" style="font-family: Niramit">
                     <strong>Source Code</strong>
                 </label>
-                <textarea class="form-control" id="exampleFormControlTextarea3" rows="15" name="sourceCode" required="1" placeholer="Source"
+                <textarea class="form-control" style="font-family: Niramit" rows="15" name="sourceCode" required="1" placeholer="Source"
                     wrap="soft"><%=source%></textarea>
             </div>
 
 
             <div>
-                <button type="submit" class="btn btn-success btn-md">Submit</button>
+                <button type="submit" class="btn btn-success btn-md" style="font-family: Niramit">Submit</button>
             </div>
             <br>
             <div class="form-group">
-                <label for="exampleFormControlTextarea3">
+                <label for="exampleFormControlTextarea3" style="font-family: Niramit">
                     <strong>Output</strong>
                 </label>
-                <textarea readonly class="form-control" id="exampleFormControlTextarea3" rows="3" name="output" wrap="soft"><%=output%></textarea>
+                <textarea readonly class="form-control" style="font-family: Niramit" rows="3" name="output" wrap="soft"><%=output%></textarea>
             </div>
 
         </form>
-        <a href="/problems">Back To Problems</a>
+        <a href="/problems" style="font-family: Niramit">Back To Problems</a>
 
         
         

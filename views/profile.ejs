@@ -2,15 +2,17 @@
 
 <div class="container">
     <div>
-        <h1 style="font-weight: bold; color: #232f3e"><%=user.username%></h1>
+        <h1 style="font-weight: bold; color: #232f3e; font-family: Niramit">Profile</h1>
+        <h2 style="font-weight: bold; color: #232f3e; font-family: Niramit">Coder Name: <%=user.username%></h2>
     </div>
-    <br><br>
+    <br>
     <div>
-        <h2 style="color: #232f3e">List of Solved Problems:</h2>
-        <ul class="list-group">
-            <% user.solved.forEach(function(solve) { %>
-                <li style="font-size:medium; background-color: #b0c4de;" class="list-group-item"><%=solve.title%></li>
-            <% }) %>
+        <h2 style="color: #232f3e; font-weight: bold; font-family: Niramit">Solved Problems:</h2>
+        <ul style="list-style-type:square">
+            <% solved.forEach(function(prob) { %>
+                <br>
+                <li><h4 style="color: #232f3e; font-family: Niramit"><%= prob %></h4></li>
+            <% }); %>
         </ul>
     </div>
 </div>

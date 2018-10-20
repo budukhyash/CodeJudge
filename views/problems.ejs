@@ -1,16 +1,16 @@
 <% include partials/header%>
 
 <div class="container">
-    <h1 style="color: #232f3e; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">Problems</h1>
+    <h1 style="color: #232f3e; font-family: Niramit">Problems</h1>
     <br>
     <div class="list-group">
         <% problems.forEach(function(problem) { %>
-            <% if(problem.isSolved==1) { %>
+            <% if(solvedIds.includes(problem.id)) { %>
                 <div class="list-group-item" style="padding: 3px; border-radius: 10px; border-style: solid; border-color: darkgreen; border-width: 2px;">
-                    <h3 style="padding-left: 5px;"><%= problem.title %></h3>
+                    <h3 style="padding-left: 5px; font-family: Niramit;"><%= problem.title %></h3>
                     <div class="row">
                         <div class="col-sm-6">
-                            <a style="margin: 10px" class="btn btn-success" href="/problems/<%=problem._id%>">Try Again</a>
+                            <a style="margin: 10px; font-family: Niramit;" class="btn btn-success" href="/problems/<%=problem.id%>">Try Again</a>
                         </div>
                         <div class="col-sm-6">
                             <!-- <img src="http://localhost:3000/checked.png"> -->
@@ -21,8 +21,8 @@
                 <br>
             <% } else { %>
                 <div class="list-group-item" style="padding: 5px; border-radius: 10px; border-style: solid; border-color: lightskyblue; border-width: 2px; ">
-                    <h3 style="padding-left: 5px;"><%= problem.title %></h3>
-                    <a style="margin: 10px" class="btn btn-info" href="/problems/<%=problem._id%>">Solve Problem</a>
+                    <h3 style="padding-left: 5px; font-family: Niramit;"><%= problem.title %></h3>
+                    <a style="margin: 10px; font-family: Niramit;" class="btn btn-info" href="/problems/<%=problem.id%>">Solve Problem</a>
                 </div>
                 <br>
             <% } %>
